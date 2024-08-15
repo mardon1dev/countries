@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/main.css">
+    <title>Countries</title>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="w-full shadow-xl fixed top-0 bg-white"> 
+        <div class="container flex justify-between p-4  mx-auto">
+            <h1 class="text-[30px] font-bold">Countries</h1>
+            <ul class="flex items-center gap-3">
+                <li class="w-[50px] h-[50px] flex items-center justify-center border-2 border-red-700 rounded-[50%] text-red-700 hover:bg-red-700 hover:text-white">
+                    <span class="likeCounts">0</span>
+                    <svg class="w-[50%]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="currentColor" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </li>
+                <li class="w-[50px] h-[50px] flex items-center justify-center border-[1px] border-black rounded-[50%] hover:text-white hover:bg-black">
+                    <span class="savedCounts">0</span>
+                    <svg class="w-[50%]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 19.2674V7.84496C19 5.64147 17.4253 3.74489 15.2391 3.31522C13.1006 2.89493 10.8994 2.89493 8.76089 3.31522C6.57467 3.74489 5 5.64147 5 7.84496V19.2674C5 20.6038 6.46752 21.4355 7.63416 20.7604L10.8211 18.9159C11.5492 18.4945 12.4508 18.4945 13.1789 18.9159L16.3658 20.7604C17.5325 21.4355 19 20.6038 19 19.2674Z" stroke="currentColor" fill="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </li>
+                <li class="w-[50px] h-[50px] flex items-center justify-center border-[1px] border-black rounded-[50%]">
+                    <img class="w-[60%]" src="./images/mode-dark-svgrepo-com.svg" alt="Img">
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="pt-[100px]">
+        <div class="container p-5 mx-auto">
+            <div class="search flex items-center p-5 justify-between flex-col gap-3 sm:flex-row">
+                <input class="search-input border-gray-500 rounded-xl pl-4 w-[300px] py-3  outline-none shadow-lg" type="text" placeholder="Search..">
+                <select class="select-capital rounded-xl px-4 py-2 outline-none shadow-lg" name="countries" id="countries">
+                    <option value="all">All</option>
+                </select>
+            </div>
+
+            <div class="countries flex flex-wrap gap-2 justify-center"></div>
+        </div>
+    </main>
+    <script src="./js/script.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                }
+            }
+        }
+    </script>
+</body>
+</html>
