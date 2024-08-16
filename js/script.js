@@ -136,7 +136,7 @@ search.addEventListener("keyup", (evt) => {
     if (filteredCountries.length > 0) {
         renderCountries(filteredCountries);
     } else {
-        countriesAll.innerHTML = "<p class='text-black text-center text-2xl'>No countries found</p>";
+        countriesAll.innerHTML = "<p class='text-black text-center text-2xl dark:text-white'>No countries found</p>";
     }
 });
 
