@@ -78,7 +78,6 @@ let search = document.querySelector(".search-input")
 function renderCountries(arr) {
     countriesAll.innerHTML = "";
     let countries = arr.map(country => {
-        // const wikiUrl = `https://en.wikipedia.org/wiki/${encodeURIComponent(country.name)}`;
         
         return `
         <div class="country max-w-[350px] w-full flex flex-col rounded-xl px-2 py-3 shadow-md hover:shadow-2xl dark:bg-white">
@@ -90,7 +89,7 @@ function renderCountries(arr) {
         <div class="country-more flex items-center justify-start mt-3 gap-2">
         <button class="likeButton w-[40px] h-[40px] flex items-center justify-center bg-gray-800 rounded-lg  hover:cursor-pointer text-white" data-id =${country.id}>
         <svg class="w-[50%]" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="currentColor" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="z-0" fill-rule="evenodd" clip-rule="evenodd" d="M12 6.00019C10.2006 3.90317 7.19377 3.2551 4.93923 5.17534C2.68468 7.09558 2.36727 10.3061 4.13778 12.5772C5.60984 14.4654 10.0648 18.4479 11.5249 19.7369C11.6882 19.8811 11.7699 19.9532 11.8652 19.9815C11.9483 20.0062 12.0393 20.0062 12.1225 19.9815C12.2178 19.9532 12.2994 19.8811 12.4628 19.7369C13.9229 18.4479 18.3778 14.4654 19.8499 12.5772C21.6204 10.3061 21.3417 7.07538 19.0484 5.17534C16.7551 3.2753 13.7994 3.90317 12 6.00019Z" stroke="currentColor" fill="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
         </button>
         <button class="saveButton w-[40px] h-[40px] flex items-center justify-center bg-gray-800 rounded-lg hover:cursor-pointer text-white" data-id =${country.id}>
@@ -130,7 +129,7 @@ function renderCountries(arr) {
 renderCountries(countrys);
 
 search.addEventListener("keyup", (evt) => {
-    let value = evt.target.value.toLowerCase();
+    let value = evt.target.value.toLowerCase().trim();
     let filteredCountries;
     
     if (Number(value)) {
@@ -175,90 +174,85 @@ function searchCapiptal(arr) {
 }
 searchCapiptal(countrys);
 
-let body = document.querySelector("body")
-let moreButtons = document.querySelectorAll(".more");
-console.log(moreButtons);
+let likedCountries = []
+let likeCounts = document.querySelector(".likeCounts");
 
-moreButtons.forEach(button => {
-    button.addEventListener("click", (event) => {
-        event.preventDefault(); 
-        let countryElement = button.closest(".country");
-        console.log(countryElement);
-        
+let savedCountries = []
+let savedCounts = document.querySelector(".savedCounts");
+
+
+let body = document.querySelector("body");
+let countries = document.querySelector(".countries");
+
+countries.addEventListener("click", (event) => {
+    let moreButton = event.target.closest(".more");
+    if (moreButton) {
+        event.preventDefault();
+
+        let countryElement = event.target.closest(".country");
         let extraInfo = countryElement.querySelector(".extra-info");
         extraInfo.classList.remove("hidden");
         body.classList.add("scroll");
-        
+
         let closeBtn = countryElement.querySelector(".closeBtn");
         closeBtn.addEventListener("click", () => {
             extraInfo.classList.add("hidden");
             body.classList.remove("scroll");
-        })
-    });
-});
-
-let likedCountries = []
-let likeCounts = document.querySelector(".likeCounts");
-let likeButtons = document.querySelectorAll(".likeButton");
-likeButtons.forEach(button => {
-    button.addEventListener("click", () => {
+        });
+    }
+    
+    let likeButton = event.target.closest(".likeButton");
+    if (likeButton) {
+        event.preventDefault();
+        likeButton.classList.toggle("bg-white");
+        likeButton.classList.toggle("text-red-700");
+        likeButton.classList.toggle("border-[1px]");
+        likeButton.classList.toggle("bg-gray-800");
+        likeButton.classList.toggle("text-white");
+        likeButton.classList.toggle("border-red-700");
         
-        button.classList.toggle("bg-white");
-        button.classList.toggle("text-red-700");
-        button.classList.toggle("border-[1px]");
-        button.classList.toggle("bg-gray-800");
-        button.classList.toggle("text-white");
-        button.classList.toggle("border-red-700");
-        
-        
-        let countryId = button.dataset.id;
+        let countryId = likeButton.dataset.id;
         let country = countrys.find(country => country.id == countryId);
         if (country) {
             if (!likedCountries.includes(country)) {
                 likedCountries.push(country);
             } 
         }
+
         let count = Number(likeCounts.textContent);
-        
-        if (button.classList.contains("bg-white")) {
+        if (likeButton.classList.contains("bg-white")) {
             count += 1; 
         } else {
             count -= 1;
         }
         likeCounts.textContent = count;
-    })
-})
+    }
 
 
-let savedCountries = []
-let savedCounts = document.querySelector(".savedCounts");
-let savedButtons = document.querySelectorAll(".saveButton");
-savedButtons.forEach(button => {
-    button.addEventListener("click", () => {
+    let saveButton = event.target.closest(".saveButton");
+    if (saveButton) {
+        event.preventDefault();
+
+        saveButton.classList.toggle("bg-white");
+        saveButton.classList.toggle("text-gray-700");
+        saveButton.classList.toggle("border-[1px]");
+        saveButton.classList.toggle("bg-gray-800");
+        saveButton.classList.toggle("text-white");
+        saveButton.classList.toggle("border-gray-700");
         
-        button.classList.toggle("bg-white");
-        button.classList.toggle("text-black");
-        button.classList.toggle("bg-gray-800");
-        button.classList.toggle("text-white");
-        button.classList.toggle("border-[1px]");
-        button.classList.toggle("border-gray-800");
-
-        console.log("Salom");
-        
-        let countryId = button.dataset.id;
+        let countryId = saveButton.dataset.id;
         let country = countrys.find(country => country.id == countryId);
         if (country) {
             if (!savedCountries.includes(country)) {
                 savedCountries.push(country);
-            } 
+            }
         }
         let count = Number(savedCounts.textContent);
-        
-        if (button.classList.contains("bg-white")) {
+        if (saveButton.classList.contains("bg-white")) {
             count += 1; 
         } else {
             count -= 1;
         }
         savedCounts.textContent = count;
-    })
-})
+    }
+});
