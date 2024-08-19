@@ -1,85 +1,84 @@
 const countrys = [
-    {
-        id: 1,
-        name: "Wallis and Futuna",
-        capital: "Mata-Utu",
-        population: 11750,
-        flag: "https://flagcdn.com/wf.svg"
-    },
-    {
-        id: 2,
-        name: "Iceland",
-        capital: "Reykjavik",
-        population: 366425,
-        flag: "https://flagcdn.com/is.svg"
-    },
-    {
-        id: 3,
-        name: "Luxembourg",
-        capital: "Luxembourg",
-        population: 632275,
-        flag: "https://flagcdn.com/lu.svg"
-    },
-    {
-        id: 4,
-        name: "Mali",
-        capital: "Bamako",
-        population: 20250834,
-        flag: "https://flagcdn.com/ml.svg"
-    },
-    {
-        id: 5,
-        name: "Comoros",
-        capital: "Moroni",
-        population: 869595,
-        flag: "https://flagcdn.com/km.svg"
-    },
-    {
-        id: 6,
-        name: "Australia",
-        capital: "Canberra",
-        population: 25687041,
-        flag: "https://flagcdn.com/au.svg"
-    },
-    {
-        id: 7,
-        name: "Estonia",
-        capital: "Tallinn",
-        population: 1331057,
-        flag: "https://flagcdn.com/ee.svg"
-    },
-    {
-        id: 8,
-        name: "Canada",
-        capital: "Ottawa",
-        population: 38005238,
-        flag: "https://flagcdn.com/ca.svg"
-    },
-    {
-        id: 9,
-        name: "Belarus",
-        capital: "Minsk",
-        population: 9398861,
-        flag: "https://flagcdn.com/by.svg"
-    },
-    {
-        id: 10,
-        name: "Guyana",
-        capital: "Georgetown",
-        population: 786559,
-        flag: "https://flagcdn.com/gy.svg"
-    }
-]
+  {
+    id: 1,
+    name: "Wallis and Futuna",
+    capital: "Mata-Utu",
+    population: 11750,
+    flag: "https://flagcdn.com/wf.svg",
+  },
+  {
+    id: 2,
+    name: "Iceland",
+    capital: "Reykjavik",
+    population: 366425,
+    flag: "https://flagcdn.com/is.svg",
+  },
+  {
+    id: 3,
+    name: "Luxembourg",
+    capital: "Luxembourg",
+    population: 632275,
+    flag: "https://flagcdn.com/lu.svg",
+  },
+  {
+    id: 4,
+    name: "Mali",
+    capital: "Bamako",
+    population: 20250834,
+    flag: "https://flagcdn.com/ml.svg",
+  },
+  {
+    id: 5,
+    name: "Comoros",
+    capital: "Moroni",
+    population: 869595,
+    flag: "https://flagcdn.com/km.svg",
+  },
+  {
+    id: 6,
+    name: "Australia",
+    capital: "Canberra",
+    population: 25687041,
+    flag: "https://flagcdn.com/au.svg",
+  },
+  {
+    id: 7,
+    name: "Estonia",
+    capital: "Tallinn",
+    population: 1331057,
+    flag: "https://flagcdn.com/ee.svg",
+  },
+  {
+    id: 8,
+    name: "Canada",
+    capital: "Ottawa",
+    population: 38005238,
+    flag: "https://flagcdn.com/ca.svg",
+  },
+  {
+    id: 9,
+    name: "Belarus",
+    capital: "Minsk",
+    population: 9398861,
+    flag: "https://flagcdn.com/by.svg",
+  },
+  {
+    id: 10,
+    name: "Guyana",
+    capital: "Georgetown",
+    population: 786559,
+    flag: "https://flagcdn.com/gy.svg",
+  },
+];
 
 let countriesAll = document.querySelector(".countries");
 
-let search = document.querySelector(".search-input")
+let search = document.querySelector(".search-input");
 
 function renderCountries(arr) {
-    countriesAll.innerHTML = "";
-    let countries = arr.map(country => {
-        
-        return `
+  countriesAll.innerHTML = "";
+  let countries = arr.map((country) => {
+    return `
         <div class="country max-w-[350px] w-full flex flex-col rounded-xl px-2 py-3 shadow-md hover:shadow-2xl dark:bg-white">
         <img class="w-full h-[200px] object-cover rounded-lg" src="${country.flag}" alt="${country.name}">
         <h2 class="text-black mt-2">Country:${country.name}</h2>
@@ -122,137 +121,145 @@ function renderCountries(arr) {
         </div>
         </div>
         </div>
-        `
-    })
-    countriesAll.innerHTML = countries.join("");
+        `;
+  });
+  countriesAll.innerHTML = countries.join("");
 }
 renderCountries(countrys);
 
 search.addEventListener("keyup", (evt) => {
-    let value = evt.target.value.toLowerCase().trim();
-    let filteredCountries;
-    
-    if (Number(value)) {
-        filteredCountries = countrys.filter(country => 
-            country.id == Number(value) || 
-            country.population.toString().includes(value)
-        );
-    } else {
-        filteredCountries = countrys.filter(country => 
-            country.name.toLowerCase().includes(value) || 
-            country.capital.toLowerCase().includes(value)
-        );
-    }
-    
-    if (filteredCountries.length > 0) {
-        renderCountries(filteredCountries);
-    } else {
-        countriesAll.innerHTML = "<p class='text-black text-center text-2xl dark:text-white'>No countries found</p>";
-    }
-});
+  let value = evt.target.value.toLowerCase().trim();
+  let filteredCountries;
 
+  if (Number(value)) {
+    filteredCountries = countrys.filter(
+      (country) =>
+        country.id == Number(value) ||
+        country.population.toString().includes(value)
+    );
+  } else {
+    filteredCountries = countrys.filter(
+      (country) =>
+        country.name.toLowerCase().includes(value) ||
+        country.capital.toLowerCase().includes(value)
+    );
+  }
+
+  if (filteredCountries.length > 0) {
+    renderCountries(filteredCountries);
+  } else {
+    countriesAll.innerHTML =
+      "<p class='text-black text-center text-2xl dark:text-white'>No countries found</p>";
+  }
+});
 
 let fiindCapital = document.querySelector(".select-capital");
 function searchCapiptal(arr) {
-    let capitals = arr.map(item => item.capital);
-    capitals.forEach(element => {
-        let option = document.createElement("option");
-        option.value = element;
-        option.textContent = element;
-        fiindCapital.appendChild(option);
-    });
-    fiindCapital.addEventListener("change", ()=>{
-        let selected = fiindCapital.value;
-        if (selected === "all") {
-            renderCountries(countrys);
-        }
-        else{
-            let selectedCountry = countrys.find(country => country.capital === selected);
-            renderCountries([selectedCountry])
-        }
-    })
+  let capitals = arr.map((item) => item.capital);
+  capitals.forEach((element) => {
+    let option = document.createElement("option");
+    option.value = element;
+    option.textContent = element;
+    fiindCapital.appendChild(option);
+  });
+  fiindCapital.addEventListener("change", () => {
+    let selected = fiindCapital.value;
+    if (selected === "all") {
+      renderCountries(countrys);
+    } else {
+      let selectedCountry = countrys.find(
+        (country) => country.capital === selected
+      );
+      renderCountries([selectedCountry]);
+    }
+  });
 }
 searchCapiptal(countrys);
 
-let likedCountries = []
+let likedCountries = [];
 let likeCounts = document.querySelector(".likeCounts");
 
-let savedCountries = []
+let savedCountries = [];
 let savedCounts = document.querySelector(".savedCounts");
-
 
 let body = document.querySelector("body");
 let countries = document.querySelector(".countries");
 
 countries.addEventListener("click", (event) => {
-    let moreButton = event.target.closest(".more");
-    if (moreButton) {
-        event.preventDefault();
+  let moreButton = event.target.closest(".more");
+  if (moreButton) {
+    event.preventDefault();
 
-        let countryElement = event.target.closest(".country");
-        let extraInfo = countryElement.querySelector(".extra-info");
-        extraInfo.classList.remove("hidden");
-        body.classList.add("scroll");
-
-        let closeBtn = countryElement.querySelector(".closeBtn");
-        closeBtn.addEventListener("click", () => {
+    let countryElement = event.target.closest(".country");
+    let extraInfo = countryElement.querySelector(".extra-info");
+    extraInfo.addEventListener("click", (evt) => {
+        console.log(evt.target.classList.contains(".extra-info"));
+        if (evt.target.classList.contains("extra-info")) {
             extraInfo.classList.add("hidden");
             body.classList.remove("scroll");
-        });
+        }
+    });
+    extraInfo.classList.remove("hidden");
+    body.classList.add("scroll");
+
+    let closeBtn = countryElement.querySelector(".closeBtn");
+    closeBtn.addEventListener("click", () => {
+      extraInfo.classList.add("hidden");
+      body.classList.remove("scroll");
+    });
+  }
+
+  let likeButton = event.target.closest(".likeButton");
+  if (likeButton) {
+    event.preventDefault();
+    likeButton.classList.toggle("bg-white");
+    likeButton.classList.toggle("text-red-700");
+    likeButton.classList.toggle("border-[1px]");
+    likeButton.classList.toggle("bg-gray-800");
+    likeButton.classList.toggle("text-white");
+    likeButton.classList.toggle("border-red-700");
+
+    let countryId = likeButton.dataset.id;
+    let country = countrys.find((country) => country.id == countryId);
+    if (country) {
+      if (!likedCountries.includes(country)) {
+        likedCountries.push(country);
+      }
     }
-    
-    let likeButton = event.target.closest(".likeButton");
-    if (likeButton) {
-        event.preventDefault();
-        likeButton.classList.toggle("bg-white");
-        likeButton.classList.toggle("text-red-700");
-        likeButton.classList.toggle("border-[1px]");
-        likeButton.classList.toggle("bg-gray-800");
-        likeButton.classList.toggle("text-white");
-        likeButton.classList.toggle("border-red-700");
-        
-        let countryId = likeButton.dataset.id;
-        let country = countrys.find(country => country.id == countryId);
-        if (country) {
-            if (!likedCountries.includes(country)) {
-                likedCountries.push(country);
-            } 
-        }
 
-        let count = Number(likeCounts.textContent);
-        if (likeButton.classList.contains("bg-white")) {
-            count += 1; 
-        } else {
-            count -= 1;
-        }
-        likeCounts.textContent = count;
+    let count = Number(likeCounts.textContent);
+    if (likeButton.classList.contains("bg-white")) {
+      count += 1;
+    } else {
+      count -= 1;
     }
+    likeCounts.textContent = count;
+  }
 
+  let saveButton = event.target.closest(".saveButton");
+  if (saveButton) {
+    event.preventDefault();
 
-    let saveButton = event.target.closest(".saveButton");
-    if (saveButton) {
-        event.preventDefault();
+    saveButton.classList.toggle("bg-white");
+    saveButton.classList.toggle("text-gray-700");
+    saveButton.classList.toggle("border-[1px]");
+    saveButton.classList.toggle("bg-gray-800");
+    saveButton.classList.toggle("text-white");
+    saveButton.classList.toggle("border-gray-700");
 
-        saveButton.classList.toggle("bg-white");
-        saveButton.classList.toggle("text-gray-700");
-        saveButton.classList.toggle("border-[1px]");
-        saveButton.classList.toggle("bg-gray-800");
-        saveButton.classList.toggle("text-white");
-        saveButton.classList.toggle("border-gray-700");
-        
-        let countryId = saveButton.dataset.id;
-        let country = countrys.find(country => country.id == countryId);
-        if (country) {
-            if (!savedCountries.includes(country)) {
-                savedCountries.push(country);
-            }
-        }
-        let count = Number(savedCounts.textContent);
-        if (saveButton.classList.contains("bg-white")) {
-            count += 1; 
-        } else {
-            count -= 1;
-        }
-        savedCounts.textContent = count;
+    let countryId = saveButton.dataset.id;
+    let country = countrys.find((country) => country.id == countryId);
+    if (country) {
+      if (!savedCountries.includes(country)) {
+        savedCountries.push(country);
+      }
     }
+    let count = Number(savedCounts.textContent);
+    if (saveButton.classList.contains("bg-white")) {
+      count += 1;
+    } else {
+      count -= 1;
+    }
+    savedCounts.textContent = count;
+  }
 });
