@@ -17,17 +17,19 @@
     class="transition-colors duration-300 bg-white dark:bg-gray-900 dark:text-white"
   >
     <header
-      class="w-full shadow-xl fixed top-0 bg-white dark:bg-gray-800 text-black dark:text-white"
+      class="w-full shadow-xl fixed top-0 z-50 bg-white dark:bg-gray-800 text-black dark:text-white"
     >
       <div class="container flex justify-between p-4 mx-auto">
         <h1 class="text-[30px] font-bold">Countries</h1>
         <ul class="flex items-center gap-3">
           <li
-            class="w-[50px] h-[50px] flex items-center justify-center border-2 border-red-700 rounded-[50%] text-red-700 hover:bg-red-700 hover:text-white dark:text-red-300 dark:border-red-300 dark:hover:bg-red-500 dark:hover:text-white"
+            class="likeCountries w-[50px] h-[50px] flex items-center justify-center border-2 border-red-700 rounded-[50%] text-red-700 hover:bg-red-700 hover:text-white dark:text-red-300 dark:border-red-300 dark:hover:bg-red-500 dark:hover:text-white"
           >
             <span class="likeCounts">0</span>
             <svg
               class="w-[50%]"
+              width="24"
+              height="24"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -45,11 +47,13 @@
             </svg>
           </li>
           <li
-            class="w-[50px] h-[50px] flex items-center justify-center border-[1px] border-black rounded-[50%] hover:text-white hover:bg-black dark:border-white dark:hover:bg-gray-700"
+            class="saveCountries w-[50px] h-[50px] flex items-center justify-center border-[1px] border-black rounded-[50%] hover:text-white hover:bg-black dark:border-white dark:hover:bg-gray-700"
           >
             <span class="savedCounts">0</span>
             <svg
               class="w-[50%]"
+              width="24"
+              height="24"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -72,6 +76,8 @@
               class="w-[60%]"
               src="./images/mode-dark-svgrepo-com.svg"
               alt="Img"
+              width="24"
+              height="24"
             />
           </li>
         </ul>
@@ -95,11 +101,14 @@
             name="countries"
             id="countries"
           >
-            <option value="all">All</option>
+            <option value="all" selected>All</option>
           </select>
         </div>
 
         <div class="countries flex flex-wrap gap-2 justify-center"></div>
+        <div class="extra-info scale-0 duration-200 z-40"></div>
+        </div>
+        </div>
       </div>
     </main>
     <script src="./js/script.js"></script>
